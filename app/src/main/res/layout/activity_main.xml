@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="*"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/txtContador"
+                android:layout_margin="5dp"
+                android:layout_span="2"
+                android:text="Contador"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="28dp" />
+
+            <Button
+                android:id="@+id/btnReiniciarComenzar"
+                android:layout_margin="5dp"
+                android:layout_span="2"
+                android:backgroundTint="#FFFFFF"
+                android:onClick="comenzarJuego"
+                android:text="Comenzar"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="26dp"
+                app:strokeWidth="2dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/tarjeta1"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta2"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta3"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta4"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/tarjeta5"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta6"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta7"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta8"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/tarjeta9"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta10"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta11"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta12"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/tarjeta13"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta14"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta15"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/tarjeta16"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="#000000"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:onClick="onClick"/>
+        </TableRow>
+
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
