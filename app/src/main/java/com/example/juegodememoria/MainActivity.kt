@@ -15,13 +15,10 @@ import androidx.core.os.postDelayed
 
   class MainActivity : AppCompatActivity() {
       private lateinit var contadorMov: TextView; // UTILIZADO PARA CONTAR JUGADAS
-      private var sumarMovimientos =
-          0; // SUMA LOS MOVIMIENTOS PARA LUEGO INSERTARLOS EN EL contadorMov
-      private var valorClick = 0; // UTILIZADO PARA PASAR EL ID DE LOS BOTONES CLICKEADOS
+      private var sumarMovimientos = 0; // SUMA LOS MOVIMIENTOS PARA LUEGO INSERTARLOS EN EL contadorMov
       private lateinit var seleccionUno: Button; // UTILIZADO PARA GUARDAR VALOR DEL PRIMER CLICK
       private lateinit var seleccionDos: Button; // UTILIZADO PARA GUARDAR VALOR DEL SEGUNDO CLICK
       private var validadorClick = true; // VALIDAR QUE SE HAYA CLICKEADO 1ra O 2do VEZ
-      private var juegoComenzo = false;  // VALIDA ESTADO DEL JUEGO
       private var cartasDescubiertas: MutableList<Int> = mutableListOf();
       override fun onCreate(savedInstanceState: Bundle?) {
           super.onCreate(savedInstanceState)
@@ -119,6 +116,8 @@ import androidx.core.os.postDelayed
               sumarMovimientos++;
               contadorMov.setText(sumarMovimientos.toString());
           }
+      }
+  }
 //          if (validadorClick && !cartasDescubiertas.contains(valorClick)) {
 //              seleccionUno = findViewById(valorClick);
 //              seleccionUno.setBackgroundColor(Color.parseColor("#FFFFFF")); // CAMBIA EL FONDO DEJANDO VER EL NUMERO DE LA CARTA
@@ -156,7 +155,6 @@ import androidx.core.os.postDelayed
 //
 //          }
 
-      }
-  }
+
 
 
