@@ -7,6 +7,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ListAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.postDelayed
@@ -52,67 +53,68 @@ import androidx.core.os.postDelayed
               for (y in 1..2) {
                   var cartaAleatoria = cartas.random(); // SELECCIONA CARTA ALEATORIA
                   cartas.remove(cartaAleatoria); // SACA DE LA LISTA LA CARTA SELECCIONADA
-                  var carta =
-                      findViewById<Button>(cartaAleatoria); // SELECCIONA A TRAVES DEL ID LA CARTA
+                  var carta =findViewById<Button>(cartaAleatoria); // SELECCIONA A TRAVES DEL ID LA CARTA
                   carta.setText(numero.toString()); // INSERTA EL NUMERO EN LA CARTA
                   carta.setBackgroundColor(Color.parseColor("#000000"));
-                  carta.setEnabled(true);
+                  carta.isEnabled = true;
               }
 
           }
       }
 
-      fun bloquearBotones(ok: Boolean, uno: Int, dos: Int) {
+      fun bloquearBotones(ok: Boolean) {
           var cartas = mutableListOf(
               R.id.tarjeta1, R.id.tarjeta2, R.id.tarjeta3, R.id.tarjeta4,
               R.id.tarjeta5, R.id.tarjeta6, R.id.tarjeta7, R.id.tarjeta8,
               R.id.tarjeta9, R.id.tarjeta10, R.id.tarjeta11, R.id.tarjeta12,
               R.id.tarjeta13, R.id.tarjeta14, R.id.tarjeta15, R.id.tarjeta16
           );
-          cartas.remove(uno); // REMUEVE DE LA LISTA EL PRIMER BOTON CLICKEADO
-          cartas.remove(dos); // REMUEVE DE LA LISTA EL SEGUNDO BOTON CLICKEADO
           for (id in cartas) {
               var button = findViewById<Button>(id);
-              button.setEnabled(ok); // BLOQUEA LOS BOTONES
+              button.isEnabled = ok; //SEGUN SEA TRUE O FALSE DESBLOQUEA O BLOQUEA BOTON
           }
       }
-
-//      fun bloquearCartasDescubiertas(uno: Int, dos: Int) {
-//          cartasDescubiertas.add(uno);
-//          cartasDescubiertas.add(dos);
-//          var button1 = findViewById<Button>(uno)
-//          var button2 = findViewById<Button>(dos)
-//          button1.setEnabled(false);
-//          button2.setEnabled(false);
-//      }
+      fun desbloquearBotonesPorLista(ok: Boolean, lista : Collection<Int>){
+          var cartas = mutableListOf(
+              R.id.tarjeta1, R.id.tarjeta2, R.id.tarjeta3, R.id.tarjeta4,
+              R.id.tarjeta5, R.id.tarjeta6, R.id.tarjeta7, R.id.tarjeta8,
+              R.id.tarjeta9, R.id.tarjeta10, R.id.tarjeta11, R.id.tarjeta12,
+              R.id.tarjeta13, R.id.tarjeta14, R.id.tarjeta15, R.id.tarjeta16
+          );
+          cartas.removeAll(lista);
+          for (id in cartas) {
+              var button = findViewById<Button>(id);
+              button.isEnabled = ok; //SEGUN SEA TRUE O FALSE DESBLOQUEA O BLOQUEA BOTON
+          }
+      }
       fun addCartasAlista(uno : Int, dos: Int){
             cartasDescubiertas.add(uno);
             cartasDescubiertas.add(dos);
       }
       fun buscandoPares(valorClick: Int) {
-          if(validadorClick && !cartasDescubiertas.contains(valorClick)){
+          if(validadorClick && !cartasDescubiertas.contains(valorClick) && !valorClick.equals(R.id.btnReiniciarComenzar)){
               seleccionUno = findViewById(valorClick);
               seleccionUno.setBackgroundColor(Color.parseColor("#FFFFFF"))
               validadorClick = false;
-          }else if(!validadorClick.toString().equals(seleccionUno) && !!cartasDescubiertas.contains(valorClick)){
+              seleccionUno.isEnabled = false;
+          }else if(!validadorClick.toString().equals(seleccionUno) && !cartasDescubiertas.contains(valorClick) && !valorClick.equals(R.id.btnReiniciarComenzar)){
               seleccionDos = findViewById(valorClick);
               seleccionDos.setBackgroundColor(Color.parseColor("#FFFFFF"));
               validadorClick = true;
+              seleccionDos.isEnabled = false;
           }
           if(validadorClick){
-              bloquearBotones(false,seleccionUno.getId(),seleccionDos.getId());
+              bloquearBotones(false);
               if(seleccionUno.getText().equals(seleccionDos.getText())){
-                  seleccionUno.isEnabled = false;
-                  seleccionDos.isEnabled = false;
-                  addCartasAlista(seleccionUno.getId(),seleccionDos.getId());
+                    addCartasAlista(seleccionUno.getId(),seleccionDos.getId()); // AGREGO LAS CARTAS  A LA LISTA PARA DSP NO DESBLOQUEARLAS EN LA LINEA 119
               }else{
                   Handler().postDelayed(1000) {
                       seleccionUno.setBackgroundColor(Color.parseColor("#000000"));
                       seleccionDos.setBackgroundColor(Color.parseColor("#000000"));
                   }
               }
-              Handler().postDelayed(500) {
-                  bloquearBotones(true,seleccionUno.getId(),seleccionDos.getId());
+              Handler().postDelayed(1100) {
+                  desbloquearBotonesPorLista(true,cartasDescubiertas);
               }
               sumarMovimientos++;
               contadorMov.setText(sumarMovimientos.toString());
