@@ -26,31 +26,19 @@ import androidx.core.os.postDelayed
           super.onCreate(savedInstanceState)
           setContentView(R.layout.activity_main);
           contadorMov = findViewById(R.id.txtContador);
-
+          comenzarJuego(findViewById(R.id.btnReiniciarComenzar));
       }
 
       fun comenzarJuego(v: View) {
           prepararJuego(); // SE ENCARGA DE ELEGIR E INSERTAR LOS NUMEROS EN LAS CARTAS ALEATORIAMENTE
           sumarMovimientos = 0
           contadorMov.setText(sumarMovimientos.toString());
-          juegoComenzo = true;
-          if (juegoComenzo) {
-
-               for (item in cartasDescubiertas) {
-                  var button = findViewById<Button>(item);
-                  button.setEnabled(true);
-                  cartasDescubiertas.remove(item);
-              }
-          }
+          cartasDescubiertas.clear();
       }
 
+
       fun onClick(v: View) {
-          valorClick = v.getId();
-          if (juegoComenzo) {
-              buscandoPares(valorClick); // SE ENCARGA DE DESCUBRIR LAS CARTAS SI HAY PARIDAD DE NUMERO
-          } else {
-              Toast.makeText(this, "Apreta COMENZAR", Toast.LENGTH_SHORT).show()
-          }
+              buscandoPares(v.getId()); // SE ENCARGA DE DESCUBRIR LAS CARTAS SI HAY PARIDAD DE NUMERO
       }
 
       fun prepararJuego() {
@@ -61,17 +49,14 @@ import androidx.core.os.postDelayed
               R.id.tarjeta13, R.id.tarjeta14, R.id.tarjeta15, R.id.tarjeta16
           ); // LISTA MUTABLE CON LOS ID`S DE LAS CARTAS
           for (numero in 1..8) { // ESTRUCTURA PARA ELEGIR NUMERO Y POSICION DENTRO DEL TABLERO
-              for (i in cartas) {
-                  var carta = findViewById<Button>(i);
-                  carta.setBackgroundColor(Color.parseColor("#000000"));
-
-              }
               for (y in 1..2) {
                   var cartaAleatoria = cartas.random(); // SELECCIONA CARTA ALEATORIA
                   cartas.remove(cartaAleatoria); // SACA DE LA LISTA LA CARTA SELECCIONADA
                   var carta =
                       findViewById<Button>(cartaAleatoria); // SELECCIONA A TRAVES DEL ID LA CARTA
                   carta.setText(numero.toString()); // INSERTA EL NUMERO EN LA CARTA
+                  carta.setBackgroundColor(Color.parseColor("#000000"));
+                  carta.setEnabled(true);
               }
 
           }
@@ -92,56 +77,82 @@ import androidx.core.os.postDelayed
           }
       }
 
-      fun bloquearCartasDescubiertas(uno: Int, dos: Int) {
-          cartasDescubiertas.add(uno);
-          cartasDescubiertas.add(dos);
-          var button1 = findViewById<Button>(uno)
-          var button2 = findViewById<Button>(dos)
-          button1.setEnabled(false);
-          button2.setEnabled(false);
+//      fun bloquearCartasDescubiertas(uno: Int, dos: Int) {
+//          cartasDescubiertas.add(uno);
+//          cartasDescubiertas.add(dos);
+//          var button1 = findViewById<Button>(uno)
+//          var button2 = findViewById<Button>(dos)
+//          button1.setEnabled(false);
+//          button2.setEnabled(false);
+//      }
+      fun addCartasAlista(uno : Int, dos: Int){
+            cartasDescubiertas.add(uno);
+            cartasDescubiertas.add(dos);
       }
-
       fun buscandoPares(valorClick: Int) {
-          if (validadorClick && !cartasDescubiertas.contains(valorClick)) {
+          if(validadorClick && !cartasDescubiertas.contains(valorClick)){
               seleccionUno = findViewById(valorClick);
-              seleccionUno.setBackgroundColor(Color.parseColor("#FFFFFF")); // CAMBIA EL FONDO DEJANDO VER EL NUMERO DE LA CARTA
-              validadorClick =
-                  false; // HACE QUE EL SEGUNDO CLICK SEA TOMADO POR EL ELSE Y GUARDADO EN LA VARIABLE seleccionDos
-          } else if (valorClick != seleccionUno.getId() && seleccionUno.length() != 0 && !cartasDescubiertas.contains(
-                  valorClick
-              )
-          ) { // VALIDA QUE EL CLICK NO SEA EN UNA MISMA CARTA
+              seleccionUno.setBackgroundColor(Color.parseColor("#FFFFFF"))
+              validadorClick = false;
+          }else if(!validadorClick.toString().equals(seleccionUno) && !!cartasDescubiertas.contains(valorClick)){
               seleccionDos = findViewById(valorClick);
               seleccionDos.setBackgroundColor(Color.parseColor("#FFFFFF"));
-              validadorClick =
-                  true; // ABRE LA ENTRADA AL IF PARA GUARDAR PRIMER CLICK EN seleccionUno
-              bloquearBotones(
-                  false,
-                  seleccionUno.getId(),
-                  seleccionDos.getId()
-              ); // BLOQUEA LOS BOTONES QUE NO HAYAN SIDO CLICKEADOS
-              if (!seleccionUno.getText().equals(seleccionDos.getText())) {
-                  if (!cartasDescubiertas.contains(seleccionUno.getId())) { // VALIDA QUE NO SEAN NUMEROS IGUALES Y LOS OCULTA
-                      Handler().postDelayed(875) {
-                          seleccionUno.setBackgroundColor(Color.parseColor("#000000"));
-                      }
-                  }
-                  if (!cartasDescubiertas.contains(seleccionDos.getId())) {
-                      Handler().postDelayed(875) {
-                          seleccionDos.setBackgroundColor(Color.parseColor("#000000"));
-                      }
-                  }
-              } else {
-                  bloquearCartasDescubiertas(seleccionUno.getId(), seleccionDos.getId());
-
-              }
-              Handler().postDelayed(875) {
-                  bloquearBotones(true, seleccionUno.getId(), seleccionDos.getId())
-              }
-              sumarMovimientos++
-              contadorMov.setText(sumarMovimientos.toString()); // SUMA EL MOVIMIENTO AL CONTADOR
-
+              validadorClick = true;
           }
+          if(validadorClick){
+              bloquearBotones(false,seleccionUno.getId(),seleccionDos.getId());
+              if(seleccionUno.getText().equals(seleccionDos.getText())){
+                  seleccionUno.isEnabled = false;
+                  seleccionDos.isEnabled = false;
+                  addCartasAlista(seleccionUno.getId(),seleccionDos.getId());
+              }else{
+                  Handler().postDelayed(1000) {
+                      seleccionUno.setBackgroundColor(Color.parseColor("#000000"));
+                      seleccionDos.setBackgroundColor(Color.parseColor("#000000"));
+                  }
+              }
+              Handler().postDelayed(500) {
+                  bloquearBotones(true,seleccionUno.getId(),seleccionDos.getId());
+              }
+              sumarMovimientos++;
+              contadorMov.setText(sumarMovimientos.toString());
+          }
+//          if (validadorClick && !cartasDescubiertas.contains(valorClick)) {
+//              seleccionUno = findViewById(valorClick);
+//              seleccionUno.setBackgroundColor(Color.parseColor("#FFFFFF")); // CAMBIA EL FONDO DEJANDO VER EL NUMERO DE LA CARTA
+//              validadorClick = false; // HACE QUE EL SEGUNDO CLICK SEA TOMADO POR EL ELSE Y GUARDADO EN LA VARIABLE seleccionDos
+//          } else if (valorClick != seleccionUno.getId() && seleccionUno.length() != 0 && !cartasDescubiertas.contains(valorClick)) { // VALIDA QUE EL CLICK NO SEA EN UNA MISMA CARTA
+//              seleccionDos = findViewById(valorClick);
+//              seleccionDos.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//              validadorClick =
+//                  true; // ABRE LA ENTRADA AL IF PARA GUARDAR PRIMER CLICK EN seleccionUno
+//              bloquearBotones(
+//                  false,
+//                  seleccionUno.getId(),
+//                  seleccionDos.getId()
+//              ); // BLOQUEA LOS BOTONES QUE NO HAYAN SIDO CLICKEADOS
+//              if (!seleccionUno.getText().equals(seleccionDos.getText())) {
+//                  if (!cartasDescubiertas.contains(seleccionUno.getId())) { // VALIDA QUE NO SEAN NUMEROS IGUALES Y LOS OCULTA
+//                      Handler().postDelayed(875) {
+//                          seleccionUno.setBackgroundColor(Color.parseColor("#000000"));
+//                      }
+//                  }
+//                  if (!cartasDescubiertas.contains(seleccionDos.getId())) {
+//                      Handler().postDelayed(875) {
+//                          seleccionDos.setBackgroundColor(Color.parseColor("#000000"));
+//                      }
+//                  }
+//              } else {
+//                  bloquearCartasDescubiertas(seleccionUno.getId(), seleccionDos.getId());
+//
+//              }
+//              Handler().postDelayed(875) {
+//                  bloquearBotones(true, seleccionUno.getId(), seleccionDos.getId())
+//              }
+//              sumarMovimientos++
+//              contadorMov.setText(sumarMovimientos.toString()); // SUMA EL MOVIMIENTO AL CONTADOR
+//
+//          }
 
       }
   }
