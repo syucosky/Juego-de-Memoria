@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Memory Game</string>
+    <string name="Comenzar">Start</string>
+    <string name="Volver">Back</string>
+    <string name="ComoJugar">How to play</string>
+    <string name="ayudaUno">1-You must touch the card so that it turns and discovers what number it has.</string>
+    <string name="AyudaDos">2-Memorize the discovered number and look for its pair with the other cards.</string>
+    <string name="ayudaTres">3-The ultimate goal is to find the pairs in the least amount of movement possible. (It is called movement by flipping over two cards.)</string>
+    <string name="contador">Counter</string>
+    <string name="Ayuda">Help</string>
 </resources>

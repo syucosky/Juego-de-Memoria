@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Juego de Memoria</string>
+    <string name="Comenzar">Comenzar</string>
+    <string name="Volver">Volver</string>
+    <string name="ComoJugar">Como Jugar</string>
+    <string name="ayudaUno">1-Debe tocar en la tarjeta para que esta voltee y descubra que numero lleva.</string>
+    <string name="AyudaDos">2-Memorizar el numero descubierto y buscarle su par con las demas tarjetas.</string>
+    <string name="ayudaTres">3-El objetivo final es encontrar los pares en la menor cantidad de movimiento posibles.(Se le llama movimiento al voltear dos tarjetas.)</string>
+    <string name="contador">Contador</string>
+    <string name="Ayuda">Ayuda</string>
 </resources>

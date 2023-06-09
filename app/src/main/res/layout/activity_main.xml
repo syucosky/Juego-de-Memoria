@@ -4,32 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity"
-    android:background="@drawable/imagenmenustart">
+    android:background="@drawable/imagenmenustart"
+    tools:context=".MenuActivity">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Juego de Memoria"
-            android:textSize="45dp"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"/>
-            <Button
-                style="@style/btnEnComoJugar1"
-                android:id="@+id/btn1"
-                android:onClick="menuAyuda"
-                android:text="Como jugar"
-                />
-            <Button
-                style="@style/btnEnComoJugar2"
-                android:onClick="comenzarJuegoBtn"
-                android:text="Comenzar"
-                />
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="45dp" />
+
+        <Button
+            android:id="@+id/btnAyuda"
+            style="@style/btnEnComoJugar1"
+            android:onClick="menuAyuda"
+            android:text="@string/ComoJugar" />
+
+        <Button
+            style="@style/btnEnComoJugar2"
+            android:onClick="comenzarJuegoBtn"
+            android:text="@string/Comenzar" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

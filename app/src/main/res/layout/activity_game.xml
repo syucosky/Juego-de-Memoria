@@ -15,23 +15,26 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow>
-
+            <ImageView
+                android:id="@+id/ivVolver"
+                android:src="@drawable/baseline_arrow_back_24"
+                style="@style/flecha"
+                android:layout_span="1"
+                android:backgroundTint="#FFFFFF"/>
             <TextView
                 android:id="@+id/txtContador"
-                android:layout_margin="5dp"
-                android:layout_span="2"
-                android:text="Contador"
+                android:layout_span="1"
+                android:text="@string/contador"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="28dp" />
 
             <Button
                 android:id="@+id/btnReiniciarComenzar"
-                android:layout_margin="5dp"
                 android:layout_span="2"
                 android:backgroundTint="#FFFFFF"
                 android:onClick="comenzarJuego"
-                android:text="Comenzar"
+                android:text="@string/Comenzar"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="26dp"
@@ -42,38 +45,22 @@
 
             <Button
                 android:id="@+id/tarjeta1"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta2"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta3"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta4"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
         </TableRow>
 
@@ -81,38 +68,22 @@
 
             <Button
                 android:id="@+id/tarjeta5"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta6"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta7"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta8"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
         </TableRow>
 
@@ -120,38 +91,22 @@
 
             <Button
                 android:id="@+id/tarjeta9"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta10"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta11"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta12"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
         </TableRow>
 
@@ -159,41 +114,28 @@
 
             <Button
                 android:id="@+id/tarjeta13"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta14"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta15"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta16"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:backgroundTint="#000000"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                style="@style/btnJuego"
                 android:onClick="onClick"/>
         </TableRow>
+        <TableRow>
 
+/>
+        </TableRow>
 
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

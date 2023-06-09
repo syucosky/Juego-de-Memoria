@@ -1,12 +1,17 @@
 package com.example.juegodememoria
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ListAdapter
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +30,28 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game);
         contadorMov = findViewById(R.id.txtContador);
         comenzarJuego(findViewById(R.id.btnReiniciarComenzar));
+        var i = findViewById<ImageView>(R.id.ivVolver);
+        i.setOnClickListener(){
+            val i = Intent(this, MenuActivity::class.java);
+            startActivity(i);
+        }
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val mi: MenuInflater = menuInflater;
+        mi.inflate(R.menu.menu_game, menu);
+        return true;
+
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.menuAyuda){
+            val i = Intent(this, HelpActivity::class.java);
+            startActivity(i);
+        }
+        return false;
+
+    }
+
 
     fun comenzarJuego(v: View) {
         prepararJuego(); // SE ENCARGA DE ELEGIR E INSERTAR LOS NUMEROS EN LAS CARTAS ALEATORIAMENTE

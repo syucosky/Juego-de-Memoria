@@ -17,26 +17,26 @@
 
         <TextView
             style="@style/estilo"
-            android:text="1-Debe tocar en la tarjeta para que esta voltee y descubra que numero lleva."/>
+            android:text="@string/ayudaUno"/>
         <TextView
             style="@style/estilo"
-            android:text="2-Memorizar el numero descubierto y buscarle su par con las demas tarjetas."/>
+            android:text="@string/AyudaDos"/>
         <TextView
             style="@style/estilo.txt3"
-            android:text="3-El objetivo final es encontrar los pares en la menor cantidad de movimiento posibles.(Se le llama movimiento al voltear dos tarjetas.)" />
+            android:text="@string/ayudaTres" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="volver"
             android:layout_gravity=""
-            android:text="Volver "
+            android:text="@string/Volver"
             android:textSize="23dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="comenzarJuegoBtn"
-            android:text="Comenzar"
+            android:text="@string/Comenzar"
             android:textSize="23dp" />
 
 
