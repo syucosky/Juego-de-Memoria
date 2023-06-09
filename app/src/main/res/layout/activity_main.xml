@@ -20,23 +20,15 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"/>
             <Button
-                android:id="@+id/comoJugar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/btnEnComoJugar1"
+                android:id="@+id/btn1"
+                android:onClick="menuAyuda"
                 android:text="Como jugar"
-                android:textSize="23dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
                 />
             <Button
+                style="@style/btnEnComoJugar2"
                 android:onClick="comenzarJuegoBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Comenzar"
-                android:textSize="23dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
                 />
     </RelativeLayout>
 

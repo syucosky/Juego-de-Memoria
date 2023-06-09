@@ -15,28 +15,21 @@
     </style>
     <style name="estilo">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_height">90dp</item>
         <item name="android:textSize">30dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginLeft">20dp</item>
     </style>
     <style name="estilo.txt3">
-        <item name="android:layout_height">210dp</item>
+        <item name="android:layout_height">130dp</item>
     </style>
     <style name="btnEnComoJugar2">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">23dp</item>
         <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentEnd">true</item>
-        <item name="android:layout_marginRight">10dp</item>
-    </style>
-    <style name="btnEnComoJugar1">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">23dp</item>
-        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentEnd">false</item>
+        <item name="android:layout_toRightOf">@+id/btn1</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
-
 </resources>
