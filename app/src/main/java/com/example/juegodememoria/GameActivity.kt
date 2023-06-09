@@ -104,7 +104,15 @@ class GameActivity : AppCompatActivity() {
             bloquearBotones(false);
             if(seleccionUno.getText().equals(seleccionDos.getText())){
                 addCartasAlista(seleccionUno.getId(),seleccionDos.getId()); // AGREGO LAS CARTAS  A LA LISTA PARA DSP NO DESBLOQUEARLAS EN LA LINEA 119
+                Handler().postDelayed(500) {
+                    seleccionUno.setBackgroundColor(Color.parseColor("#008F39")); //VERDE
+                    seleccionDos.setBackgroundColor(Color.parseColor("#008F39"));
+                }
             }else{
+                Handler().postDelayed(500) {
+                    seleccionUno.setBackgroundColor(Color.parseColor("#B84616")); // ROJO
+                    seleccionDos.setBackgroundColor(Color.parseColor("#B84616"));
+                }
                 Handler().postDelayed(1000) {
                     seleccionUno.setBackgroundColor(Color.parseColor("#000000"));
                     seleccionDos.setBackgroundColor(Color.parseColor("#000000"));
