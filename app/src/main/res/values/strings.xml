@@ -8,4 +8,8 @@
     <string name="ayudaTres">3-El objetivo final es encontrar los pares en la menor cantidad de movimiento posibles.(Se le llama movimiento al voltear dos tarjetas.)</string>
     <string name="contador">Contador</string>
     <string name="Ayuda">Ayuda</string>
+    <string name="Volver_a_Jugar">Volver a Jugar</string>
+    <string name="Porcentaje">Porcentaje de Acierto</string>
+    <string name="Ganaste">Ganaste!</string>
+    <string name="Cant_movimiento">Cantidad de Movimiento:</string>
 </resources>

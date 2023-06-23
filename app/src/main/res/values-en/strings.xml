@@ -9,4 +9,8 @@
     <string name="ayudaTres">3-The ultimate goal is to find the pairs in the least amount of movement possible. (It is called movement by flipping over two cards.)</string>
     <string name="contador">Counter</string>
     <string name="Ayuda">Help</string>
+    <string name="Volver_a_Jugar">Play again</string>
+    <string name="Porcentaje">Hit Percentage</string>
+    <string name="Ganaste">" You win!"</string>
+    <string name="Cant_movimiento">" Amount of Movement: "</string>
 </resources>

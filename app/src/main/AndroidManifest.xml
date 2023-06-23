@@ -12,13 +12,21 @@
         android:theme="@style/Theme.JuegoDeMemoria"
         tools:targetApi="31">
         <activity
+            android:name=".FinalActivity"
+            android:launchMode="standard"
+            android:exported="false" />
+        <activity
             android:name=".HelpActivity"
+            android:launchMode="standard"
             android:exported="false" />
         <activity
             android:name=".GameActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="standard"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
+            android:launchMode="standard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

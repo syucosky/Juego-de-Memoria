@@ -35,6 +35,7 @@ class GameActivity : AppCompatActivity() {
             val i = Intent(this, MenuActivity::class.java);
             startActivity(i);
         }
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val mi: MenuInflater = menuInflater;
@@ -113,6 +114,14 @@ class GameActivity : AppCompatActivity() {
     fun addCartasAlista(uno : Int, dos: Int){
         cartasDescubiertas.add(uno);
         cartasDescubiertas.add(dos);
+        if(cartasDescubiertas.size == 16){
+            val i = Intent(this, FinalActivity::class.java);
+            var porcentaje = String.format("%.2f", 8.toDouble() / sumarMovimientos * 100);
+            i.putExtra("movimientos", sumarMovimientos.toString());
+            i.putExtra("porcentaje",porcentaje);
+            Log.d("mov", sumarMovimientos.toString());
+            startActivity(i);
+        }
     }
     fun buscandoPares(valorClick: Int) {
         if(validadorClick && !cartasDescubiertas.contains(valorClick) && !valorClick.equals(R.id.btnReiniciarComenzar)){

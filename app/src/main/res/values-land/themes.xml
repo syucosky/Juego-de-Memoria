@@ -32,15 +32,4 @@
         <item name="android:layout_toRightOf">@+id/btnAyuda</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
-    <style name="btnJuego">
-        <item name ="android:layout_height">60dp</item>
-        <item name ="android:layout_margin">1dp</item>
-        <item name ="android:backgroundTint">#000000</item>
-        <item name ="android:textColor">@color/black</item>
-        <item name ="android:textSize">20dp</item>
-    </style>
-    <style name="flecha">
-        <item name="android:layout_height">40dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-    </style>
 </resources>

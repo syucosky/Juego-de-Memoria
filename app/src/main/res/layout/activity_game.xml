@@ -15,12 +15,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow>
+
             <ImageView
                 android:id="@+id/ivVolver"
-                android:src="@drawable/baseline_arrow_back_24"
                 style="@style/flecha"
                 android:layout_span="1"
-                android:backgroundTint="#FFFFFF"/>
+                android:backgroundTint="#FFFFFF"
+                android:src="@drawable/baseline_arrow_back_24" />
+
             <TextView
                 android:id="@+id/txtContador"
                 android:layout_span="1"
