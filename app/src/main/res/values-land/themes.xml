@@ -23,13 +23,30 @@
     <style name="estilo.txt3">
         <item name="android:layout_height">130dp</item>
     </style>
-    <style name="btnEnComoJugar2">
+    <style name="btnSalir">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">23dp</item>
         <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentEnd">false</item>
         <item name="android:layout_toRightOf">@+id/btnAyuda</item>
         <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_alignRight">@+id/btnRanking</item>
+    </style>
+    <style name="btnEnComoJugar2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_above">@+id/btnAyuda</item>
+        <item name="android:textSize">23dp</item>
+        <item name="android:layout_alignLeft">@+id/btnAyuda</item>
+        <item name="android:layout_alignRight">@+id/btnAyuda</item>
+    </style>
+    <style name="btnRanking">
+        <item name="android:layout_width">165dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_above">@+id/btnSalir</item>
+        <item name="android:textSize">23dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_toRightOf">@+id/btnComenzar</item>
+
     </style>
 </resources>

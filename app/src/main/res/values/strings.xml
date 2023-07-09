@@ -12,4 +12,17 @@
     <string name="Porcentaje">Porcentaje de Acierto</string>
     <string name="Ganaste">Ganaste!</string>
     <string name="Cant_movimiento">Cantidad de Movimiento:</string>
+    <string name="Salir">Salir</string>
+    <string name="Podio">Podio</string>
+    <string name="ConfirmacionTitulo">¿Deseas Salir?</string>
+    <string name="aceptarSalir">Salir</string>
+    <string name="cancelarSalir">Cancelar</string>
+    <string name="PuestoUno">Puesto 1:</string>
+    <string name="compartirPun">Compartir Puntaje</string>
+    <string name="volverMenu">Volver al Menu</string>
+    <string name="reiniciarJuego">Reiniciar Juego</string>
+    <string name="compartirPuntajeTexto">Tu Puntaje es:</string>
+    <string name="nuevoRecord">Nuevo Record!! Ingresa tu nombre</string>
+    <string name="compartir">Compartir</string>
+    <string name="aceptar">Aceptar</string>
 </resources>

@@ -13,4 +13,17 @@
     <string name="Porcentaje">Hit Percentage</string>
     <string name="Ganaste">" You win!"</string>
     <string name="Cant_movimiento">" Amount of Movement: "</string>
+    <string name="Salir">Exit</string>
+    <string name="Podio">Ranking</string>
+    <string name="ConfirmacionTitulo">Do you want to exit?</string>
+    <string name="aceptarSalir">Exit</string>
+    <string name="cancelarSalir">Cancel</string>
+    <string name="PuestoUno">Top 1:</string>
+    <string name="compartirPun">Share Score</string>
+    <string name="volverMenu">Back to Menu</string>
+    <string name="reiniciarJuego">Restart Game</string>
+    <string name="compartirPuntajeTexto">Your Score is:</string>
+    <string name="nuevoRecord">New Record!! enter your name</string>
+    <string name="compartir">Share</string>
+    <string name="aceptar">Accept</string>
 </resources>

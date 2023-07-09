@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/imagenmenustart"
-    tools:context=".MenuActivity">
+ <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="@drawable/imagenmenustart"
+     tools:context=".MenuActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/app_name"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="45dp" />
+            android:textSize="45dp"
+            android:textStyle="bold"
+            />
 
         <Button
             android:id="@+id/btnAyuda"
@@ -32,9 +33,23 @@
             android:text="@string/ComoJugar" />
 
         <Button
+            android:id="@+id/btnRanking"
+            android:onClick="ranking"
+            style="@style/btnRanking"
+            android:text="@string/Podio" />
+
+        <Button
+            android:id="@+id/btnSalir"
+            style="@style/btnSalir"
+            android:onClick="salirJuego"
+            android:text="@string/Salir" />
+
+        <Button
+            android:id="@+id/btnComenzar"
             style="@style/btnEnComoJugar2"
             android:onClick="comenzarJuegoBtn"
             android:text="@string/Comenzar" />
+
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+ </androidx.constraintlayout.widget.ConstraintLayout>

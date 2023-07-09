@@ -10,6 +10,10 @@ class HelpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_help)
+        if(getIntent().getStringExtra("juego").equals("desdeElJuego")){
+            var btnComenzar = findViewById<Button>(R.id.btnComenzarDesdeAyuda);
+            btnComenzar.visibility = View.GONE;
+        }
     }
     fun comenzarJuegoBtn(v : View){
         val i = Intent(this, GameActivity::class.java);
@@ -18,8 +22,6 @@ class HelpActivity : AppCompatActivity() {
     }
 
     fun volver(v : View){
-        val i = Intent(this, MenuActivity::class.java);
-        startActivity(i);
         super.onBackPressed();
         finish();
     }

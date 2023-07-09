@@ -5,4 +5,13 @@
     <item
     android:id="@+id/menuAyuda"
     android:title="@string/Ayuda" />
+    <item
+        android:id="@+id/reiniciarJuego"
+        android:title="@string/reiniciarJuego" />
+    <item
+        android:id="@+id/volverAlMenu"
+        android:title="@string/volverMenu" />
+    <item
+        android:id="@+id/compartirPuntaje"
+        android:title="@string/compartirPun" />
 </menu>

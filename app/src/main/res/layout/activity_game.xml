@@ -10,11 +10,14 @@
         android:id="@+id/tableLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="*"
+        android:stretchColumns="4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
 
             <ImageView
                 android:id="@+id/ivVolver"
@@ -26,7 +29,7 @@
             <TextView
                 android:id="@+id/txtContador"
                 android:layout_span="1"
-                android:text="@string/contador"
+                android:text="0"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="28dp" />
@@ -43,101 +46,146 @@
                 app:strokeWidth="2dp" />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/tarjeta1"
                 style="@style/btnJuego"
-                android:onClick="onClick"/>
+                android:onClick="onClick"
+                android:layout_weight="1"
+                />
 
             <Button
                 android:id="@+id/tarjeta2"
                 style="@style/btnJuego"
-                android:onClick="onClick"/>
+                android:onClick="onClick"
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/tarjeta3"
                 style="@style/btnJuego"
-                android:onClick="onClick"/>
+                android:onClick="onClick"
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/tarjeta4"
                 style="@style/btnJuego"
-                android:onClick="onClick"/>
+                android:onClick="onClick"
+                android:layout_weight="1"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/tarjeta5"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta6"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta7"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta8"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/tarjeta9"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta10"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta11"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta12"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/tarjeta13"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta14"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta15"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
 
             <Button
                 android:id="@+id/tarjeta16"
+                android:layout_weight="1"
                 style="@style/btnJuego"
                 android:onClick="onClick"/>
         </TableRow>
-        <TableRow>
-
-/>
-        </TableRow>
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/topUnoText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/PuestoUno"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:id="@+id/movTop1"
+                android:layout_toRightOf="@+id/topUnoText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="10"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+        </RelativeLayout>
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

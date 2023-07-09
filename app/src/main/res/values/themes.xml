@@ -26,11 +26,27 @@
     <style name="btnEnComoJugar2">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:layout_above">@+id/btnAyuda</item>
+        <item name="android:layout_alignRight">@+id/btnAyuda</item>
+        <item name="android:layout_alignLeft">@+id/btnAyuda</item>
+    </style>
+    <style name="btnSalir">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">23dp</item>
         <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentEnd">true</item>
-        <item name="android:layout_marginRight">10dp</item>
-
+        <item name="android:layout_toEndOf">@+id/btnAyuda</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_alignRight">@+id/btnRanking</item>
+    </style>
+    <style name="btnRanking">
+        <item name="android:layout_width">165dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">23dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_above">@+id/btnSalir</item>
+        <item name="android:layout_toRightOf">@+id/btnComenzar</item>
     </style>
     <style name="btnEnComoJugar1">
         <item name="android:layout_width">wrap_content</item>
@@ -49,8 +65,5 @@
     <style name="flecha">
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_marginTop">8dp</item>
-    </style>
-    <style>
-
     </style>
 </resources>
