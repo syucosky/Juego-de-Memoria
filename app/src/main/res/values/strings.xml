@@ -25,4 +25,10 @@
     <string name="nuevoRecord">Nuevo Record!! Ingresa tu nombre</string>
     <string name="compartir">Compartir</string>
     <string name="aceptar">Aceptar</string>
+    <string name="Posicion">Posicion</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Movimientos">Movimientos</string>
+    <string name="Jugar">Jugar</string>
+    <string name="Que_quieres_hacer">Que Quieres hacer?</string>
+    <string name="Sin_Podio">Sin Podio</string>
 </resources>

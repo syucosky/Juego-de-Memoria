@@ -1,8 +1,6 @@
 package com.example.juegodememoria
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -17,8 +15,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.core.os.postDelayed
-import org.json.JSONArray
-import org.json.JSONObject
+
 
 
 class GameActivity : AppCompatActivity() {
@@ -28,120 +25,107 @@ class GameActivity : AppCompatActivity() {
     private lateinit var seleccionDos: Button; // UTILIZADO PARA GUARDAR VALOR DEL SEGUNDO CLICK
     private var validadorClick = true; // VALIDAR QUE SE HAYA CLICKEADO 1ra O 2do VEZ
     private var cartasDescubiertas: MutableList<Int> = mutableListOf();
+    private val PREFS_NAME = "partidaGuardada"
+    val partidaGuardada : SharedPreferences = getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game);
+
         contadorMov = findViewById(R.id.txtContador);
         comenzarJuego(findViewById(R.id.btnReiniciarComenzar));
+
+
+
         var i = findViewById<ImageView>(R.id.ivVolver);
         i.setOnClickListener() {
             val i = Intent(this, MenuActivity::class.java);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(i);
         }
-        val sharedPreferences = Ranking(this);
-        val top5FromPrefs = sharedPreferences.getTop5Players()
-        var mostrarTop1 = findViewById<TextView>(R.id.movTop1).setText( top5FromPrefs.getJSONObject(0).getInt("movimiento").toString());
-    }
-    fun corrimientoRank(num : Int, mov : Int, nombre : String, pref : Ranking){
-        var top = pref.getTop5Players();
-        var array = JSONArray()
-        var jugador1 = JSONObject()
-        var jugador2 = JSONObject()
-        var jugador3 = JSONObject()
-        var jugador4 = JSONObject()
-        var jugador5 = JSONObject()
-        if(num == 1){
-            jugador1.put("Top 1",nombre);
-            jugador1.put("movimiento", mov);
-            array.put(jugador1);
-            jugador2.put("Top 2",top.getJSONObject(0).getString("Top 1"));
-            jugador2.put("movimiento", top.getJSONObject(0).getInt("movimiento"));
-            array.put(jugador2);
-            jugador3.put("Top 3",top.getJSONObject(1).getString("Top 2"));
-            jugador3.put("movimiento", top.getJSONObject(1).getInt("movimiento"));
-            array.put(jugador3);
-            jugador4.put("Top 4",top.getJSONObject(2).getString("Top 3"));
-            jugador4.put("movimiento", top.getJSONObject(2).getInt("movimiento"));
-            array.put(jugador4);
-            jugador5.put("Top 5",top.getJSONObject(3).getString("Top 4"));
-            jugador5.put("movimiento", top.getJSONObject(3).getInt("movimiento"));
-            array.put(jugador5);
-            val sharedPreferences = Ranking(this);
-            sharedPreferences.saveTop5Players(array);
-        }else if (num == 2){
-            jugador1.put("Top 1",top.getJSONObject(0).getString("Top 1"));
-            jugador1.put("movimiento", top.getJSONObject(0).getInt("movimiento"));
-            array.put(jugador1);
-            jugador2.put("Top 2",nombre);
-            jugador2.put("movimiento", mov);
-            array.put(jugador2);
-            jugador3.put("Top 3",top.getJSONObject(1).getString("Top 2"));
-            jugador3.put("movimiento", top.getJSONObject(1).getInt("movimiento"));
-            array.put(jugador3);
-            jugador4.put("Top 4",top.getJSONObject(2).getString("Top 3"));
-            jugador4.put("movimiento", top.getJSONObject(2).getInt("movimiento"));
-            array.put(jugador4);
-            jugador5.put("Top 5",top.getJSONObject(3).getString("Top 4"));
-            jugador5.put("movimiento", top.getJSONObject(3).getInt("movimiento"));
-            array.put(jugador5);
-            val sharedPreferences = Ranking(this);
-            sharedPreferences.saveTop5Players(array);
-        }else if(num == 3){
-            jugador1.put("Top 1",top.getJSONObject(0).getString("Top 1"));
-            jugador1.put("movimiento", top.getJSONObject(0).getInt("movimiento"));
-            array.put(jugador1);
-            jugador2.put("Top 2",top.getJSONObject(1).getString("Top 2"));
-            jugador2.put("movimiento", top.getJSONObject(1).getInt("movimiento"));
-            array.put(jugador2);
-            jugador3.put("Top 3",nombre);
-            jugador3.put("movimiento", mov);
-            array.put(jugador3);
-            jugador4.put("Top 4",top.getJSONObject(2).getString("Top 3"));
-            jugador4.put("movimiento", top.getJSONObject(2).getInt("movimiento"));
-            array.put(jugador4);
-            jugador5.put("Top 5",top.getJSONObject(3).getString("Top 4"));
-            jugador5.put("movimiento", top.getJSONObject(3).getInt("movimiento"));
-            array.put(jugador5);
-            val sharedPreferences = Ranking(this);
-            sharedPreferences.saveTop5Players(array);
-        }else if (num == 4){
-            jugador1.put("Top 1",top.getJSONObject(0).getString("Top 1"));
-            jugador1.put("movimiento", top.getJSONObject(0).getInt("movimiento"));
-            array.put(jugador1);
-            jugador2.put("Top 2",top.getJSONObject(1).getString("Top 2"));
-            jugador2.put("movimiento", top.getJSONObject(1).getInt("movimiento"));
-            array.put(jugador2);
-            jugador3.put("Top 3",top.getJSONObject(2).getString("Top 3"));
-            jugador3.put("movimiento", top.getJSONObject(2).getInt("movimiento"));
-            array.put(jugador3);
-            jugador4.put("Top 4",nombre);
-            jugador4.put("movimiento", mov);
-            array.put(jugador4);
-            jugador5.put("Top 5",top.getJSONObject(3).getString("Top 4"));
-            jugador5.put("movimiento", top.getJSONObject(3).getInt("movimiento"));
-            array.put(jugador5);
-            val sharedPreferences = Ranking(this);
-            sharedPreferences.saveTop5Players(array);
-        }else if(num == 5){
-            jugador1.put("Top 1",top.getJSONObject(0).getString("Top 1"));
-            jugador1.put("movimiento", top.getJSONObject(0).getInt("movimiento"));
-            array.put(jugador1);
-            jugador2.put("Top 2",top.getJSONObject(1).getString("Top 2"));
-            jugador2.put("movimiento", top.getJSONObject(1).getInt("movimiento"));
-            array.put(jugador2);
-            jugador3.put("Top 3",top.getJSONObject(2).getString("Top 3"));
-            jugador3.put("movimiento", top.getJSONObject(2).getInt("movimiento"));
-            array.put(jugador3);
-            jugador4.put("Top 4",top.getJSONObject(3).getString("Top 4"));
-            jugador4.put("movimiento", top.getJSONObject(3).getInt("movimiento"));
-            array.put(jugador4);
-            jugador5.put("Top 5",nombre);
-            jugador5.put("movimiento", mov);
-            array.put(jugador5);
-            val sharedPreferences = Ranking(this);
-            sharedPreferences.saveTop5Players(array);
+        val sharedPreferences : SharedPreferences = getSharedPreferences("Rank5", Context.MODE_PRIVATE);
+        val top1 = sharedPreferences.getInt("mov1", 99);
+        if(top1 == 0 || top1 == 99){
+            var mostrarTop1 = findViewById<TextView>(R.id.movTop1).setText("-");
+        }else{
+            var mostrarTop1 = findViewById<TextView>(R.id.movTop1).setText(top1.toString());
         }
+
+
+
+    }
+    fun corrimientoRank(num : Int, mov : Int, nombre : String){
+        val sharedPreferences : SharedPreferences = getSharedPreferences("Rank5", MODE_PRIVATE);
+        var editor = sharedPreferences.edit()
+        val top1Nombre = sharedPreferences.getString("Top 1","sin podio")
+        val top1Mov =  sharedPreferences.getInt("mov1", -1);
+        val top2Nombre = sharedPreferences.getString("Top 2","sin podio")
+        val top2Mov  = sharedPreferences.getInt("mov2", -1);
+        val top3Nombre = sharedPreferences.getString("Top 3","sin podio")
+        val top3Mov  = sharedPreferences.getInt("mov3", -1);
+        val top4Nombre = sharedPreferences.getString("Top 4","sin podio")
+        val top4Mov  = sharedPreferences.getInt("mov4", -1);
+        if(num == 1){
+            editor.putString("Top 1", nombre);
+            editor.putInt("mov1", mov);
+            editor.putString("Top 2", top1Nombre);
+            editor.putInt("mov2", top1Mov);
+            editor.putString("Top 3", top2Nombre);
+            editor.putInt("mov3", top2Mov);
+            editor.putString("Top 4", top3Nombre);
+            editor.putInt("mov4", top3Mov);
+            editor.putString("Top 5", top4Nombre);
+            editor.putInt("mov5", top4Mov);
+            editor.commit();
+        }else if (num == 2){
+            editor.putString("Top 1", top1Nombre);
+            editor.putInt("mov1", top1Mov);
+            editor.putString("Top 2", nombre);
+            editor.putInt("mov2", mov);
+            editor.putString("Top 3", top2Nombre);
+            editor.putInt("mov3", top2Mov);
+            editor.putString("Top 4", top3Nombre);
+            editor.putInt("mov4", top3Mov);
+            editor.putString("Top 5", top4Nombre);
+            editor.putInt("mov5", top4Mov);
+            editor.commit();
+        }else if(num == 3){
+            editor.putString("Top 1", top1Nombre);
+            editor.putInt("mov1", top1Mov);
+            editor.putString("Top 2", top2Nombre);
+            editor.putInt("mov2", top2Mov);
+            editor.putString("Top 3", nombre);
+            editor.putInt("mov3", mov);
+            editor.putString("Top 4", top3Nombre);
+            editor.putInt("mov4", top3Mov);
+            editor.putString("Top 5", top4Nombre);
+            editor.putInt("mov5", top4Mov);
+            editor.commit();
+        }else if (num == 4){
+            editor.putString("Top 1", top1Nombre);
+            editor.putInt("mov1", top1Mov);
+            editor.putString("Top 2", top2Nombre);
+            editor.putInt("mov2", top2Mov);
+            editor.putString("Top 3", top3Nombre);
+            editor.putInt("mov3", top3Mov);
+            editor.putString("Top 4", nombre);
+            editor.putInt("mov4", mov);
+            editor.putString("Top 5", top4Nombre);
+            editor.putInt("mov5", top4Mov);
+            editor.commit();
+        }else if(num == 5){
+            editor.putString("Top 1", top1Nombre);
+            editor.putInt("mov1", top1Mov);
+            editor.putString("Top 2", top2Nombre);
+            editor.putInt("mov2", top2Mov);
+            editor.putString("Top 3", top3Nombre);
+            editor.putInt("mov3", top3Mov);
+            editor.putString("Top 4", top4Nombre);
+            editor.putInt("mov4", top4Mov);
+            editor.putString("Top 5", nombre);
+            editor.putInt("mov5", mov);
+            editor.commit();
+        }
+
     }
 
 
@@ -176,13 +160,11 @@ class GameActivity : AppCompatActivity() {
                 i2.putExtra(Intent.EXTRA_TEXT,"Your Score is: " + contadorMov.getText());
                 if (i2.resolveActivity(packageManager) != null){
                     startActivity(i2);
-                    Log.d(applicationContext.toString(),"ingles");
                 }
             }else {
                     i2.putExtra(Intent.EXTRA_TEXT, "Tu Puntaje es: " + contadorMov.getText());
                     if (i2.resolveActivity(packageManager) != null) {
                         startActivity(i2);
-                        Log.d(applicationContext.toString(),"espanol");
                     }
             }
         }
@@ -203,6 +185,7 @@ class GameActivity : AppCompatActivity() {
         buscandoPares(v.getId()); // SE ENCARGA DE DESCUBRIR LAS CARTAS SI HAY PARIDAD DE NUMERO
     }
 
+
     fun prepararJuego() {
         val cartas = mutableListOf(
             R.id.tarjeta1, R.id.tarjeta2, R.id.tarjeta3, R.id.tarjeta4,
@@ -210,6 +193,7 @@ class GameActivity : AppCompatActivity() {
             R.id.tarjeta9, R.id.tarjeta10, R.id.tarjeta11, R.id.tarjeta12,
             R.id.tarjeta13, R.id.tarjeta14, R.id.tarjeta15, R.id.tarjeta16
         ); // LISTA MUTABLE CON LOS ID`S DE LAS CARTAS
+        var editor = partidaGuardada.edit();
         for (numero in 1..8) { // ESTRUCTURA PARA ELEGIR NUMERO Y POSICION DENTRO DEL TABLERO
             for (y in 1..2) {
                 var cartaAleatoria = cartas.random(); // SELECCIONA CARTA ALEATORIA
@@ -218,6 +202,7 @@ class GameActivity : AppCompatActivity() {
                 carta.setText(numero.toString()); // INSERTA EL NUMERO EN LA CARTA
                 carta.setBackgroundColor(Color.parseColor("#000000"));
                 carta.isEnabled = true;
+                editor.putString("tarjeta")
             }
 
         }
@@ -249,22 +234,21 @@ class GameActivity : AppCompatActivity() {
         }
     }
     fun buscarPos(mov : Int):Int{
-        val sharedPreferences = Ranking(this);
-        val top5FromPrefs = sharedPreferences.getTop5Players()
-        val top1Mov =  top5FromPrefs.getJSONObject(0).getInt("movimiento")
-        val top2Mov  = top5FromPrefs.getJSONObject(1).getInt("movimiento")
-        val top3Mov  = top5FromPrefs.getJSONObject(2).getInt("movimiento")
-        val top4Mov  = top5FromPrefs.getJSONObject(3).getInt("movimiento")
-        val top5Mov  = top5FromPrefs.getJSONObject(4).getInt("movimiento")
-        if(top1Mov > mov){
+        val sharedPreferences : SharedPreferences = getSharedPreferences("Rank5", Context.MODE_PRIVATE);
+        val top1Mov =  sharedPreferences.getInt("mov1", -1);
+        val top2Mov  = sharedPreferences.getInt("mov2", -1);
+        val top3Mov  = sharedPreferences.getInt("mov3", -1);
+        val top4Mov  = sharedPreferences.getInt("mov4", -1);
+        val top5Mov  = sharedPreferences.getInt("mov5", -1);
+        if(top1Mov == 0 || top1Mov > mov){
             return 1;
-        }else if(top2Mov > mov){
+        }else if(top2Mov == 0 || top2Mov > mov){
             return 2;
-        }else if(top3Mov > mov){
+        }else if(top3Mov == 0 || top3Mov > mov){
             return 3;
-        }else if(top4Mov > mov){
+        }else if(top4Mov == 0 || top4Mov > mov){
             return 4;
-        }else if(top5Mov > mov){
+        }else if(top5Mov == 0 || top5Mov > mov){
             return 5;
         }
         else{
@@ -274,8 +258,7 @@ class GameActivity : AppCompatActivity() {
     fun addCartasAlista(uno : Int, dos: Int){
         cartasDescubiertas.add(uno);
         cartasDescubiertas.add(dos);
-        if(cartasDescubiertas.size == 2) {
-            val sharedPreferences = Ranking(this);
+        if(cartasDescubiertas.size == 2) {     // PONER EN 2 PARA ACELERAR EL JUEGO
             val posicion = buscarPos(sumarMovimientos)
             if(posicion != 0){
                 val input = EditText(this)
@@ -283,7 +266,50 @@ class GameActivity : AppCompatActivity() {
                     .setMessage(getString(R.string.nuevoRecord))
                     .setView(input)
                     .setPositiveButton(getString(R.string.aceptar)) { dialog,which ->
-                        corrimientoRank(buscarPos(sumarMovimientos),sumarMovimientos,input.text.toString(),sharedPreferences);
+                        corrimientoRank(buscarPos(sumarMovimientos),sumarMovimientos,input.text.toString());
+                        val builder2 = AlertDialog.Builder(this)
+                            .setMessage(R.string.Que_quieres_hacer)
+                            .setPositiveButton(R.string.Volver_a_Jugar) { dialog,which ->
+                                if(posicion == 1){
+                                    var mostrarTop1 = findViewById<TextView>(R.id.movTop1).setText(sumarMovimientos.toString())
+                                }
+                                prepararJuego(); // SE ENCARGA DE ELEGIR E INSERTAR LOS NUMEROS EN LAS CARTAS ALEATORIAMENTE
+                                sumarMovimientos = 0
+                                contadorMov.setText(sumarMovimientos.toString());
+                                cartasDescubiertas.clear();
+                            }
+                            .setNegativeButton(getString(R.string.compartir)) { dialog, which ->
+                                val i2 = Intent();
+                                i2.action = Intent.ACTION_SEND;
+                                i2.type= "text/plain";
+                                if(R.string.compartir.equals("Share")){
+                                    i2.putExtra(Intent.EXTRA_TEXT,"Your Score is: " + contadorMov.getText());
+                                    if (i2.resolveActivity(packageManager) != null){
+                                        startActivity(i2);
+                                    }
+                                }else {
+                                    i2.putExtra(Intent.EXTRA_TEXT, "Tu Puntaje es: " + contadorMov.getText());
+                                    if (i2.resolveActivity(packageManager) != null) {
+                                        startActivity(i2);
+                                    }
+                                }
+
+                            }
+                            .setNeutralButton(R.string.Podio){ dialog, which ->
+                                val i = Intent(this,FinalActivity::class.java);
+                                startActivity(i);
+                            }
+                        val dialog2 = builder2.create();
+                        dialog2.setCancelable(false);
+                        dialog2.show();
+                    }
+                val dialog = builder.create();
+                dialog.setCancelable(false);
+                dialog.show();
+            }else{
+                val builder2 = AlertDialog.Builder(this)
+                    .setMessage(R.string.Que_quieres_hacer)
+                    .setPositiveButton(R.string.Volver_a_Jugar) { dialog,which ->
                         prepararJuego(); // SE ENCARGA DE ELEGIR E INSERTAR LOS NUMEROS EN LAS CARTAS ALEATORIAMENTE
                         sumarMovimientos = 0
                         contadorMov.setText(sumarMovimientos.toString());
@@ -308,17 +334,12 @@ class GameActivity : AppCompatActivity() {
                     }
                     .setNeutralButton(R.string.Podio){ dialog, which ->
                         val i = Intent(this,FinalActivity::class.java);
-                        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(i);
                     }
-                val dialog = builder.create();
-                dialog.show();
-            }else{
-
+                val dialog2 = builder2.create();
+                dialog2.setCancelable(false);
+                dialog2.show();
             }
-
-
-
             }
         }
     fun buscandoPares(valorClick: Int) {
