@@ -41,11 +41,9 @@ class GameActivity : AppCompatActivity() {
         var okPartida = partidaPrefs.getInt("hayPartida",3);
         var contadorShPref = partidaPrefs.getString("contador",null);
         if(okPartida == 1){
-            Log.d("dentro del id CargarPart", " DENTRO DEL CARGAR PARTIDA")
             contadorMov.setText(contadorShPref)
             cargarPartida();
         }else {
-            Log.d("dentro del else comenzarJuego", " DENTRO DEL COMENZAR JUEGO")
             comenzarJuego(findViewById(R.id.btnReiniciarComenzar));
         }
 
@@ -217,7 +215,6 @@ class GameActivity : AppCompatActivity() {
                 var carta =findViewById<Button>(cartaAleatoria); // SELECCIONA A TRAVES DEL ID LA CARTA
                 carta.setText(numero.toString()); // INSERTA EL NUMERO EN LA CARTA
                 carta.setBackgroundColor(Color.parseColor("#000000"));
-                Log.d("Dentro prepararJuego", numero.toString())
                 hashMap[cartaAleatoria] = numero;
                 carta.isEnabled = true;
             }
@@ -230,7 +227,6 @@ class GameActivity : AppCompatActivity() {
         }
     }
     fun cargarPartida(){
-        Log.d("CARGAR PARTIDA FUNCION", " CARGAR PARTIDA FUNCION")
         val jsonString: String? = partidaPrefs.getString("hashMapCartas", null);
         val hashMap: HashMap<String, Int> = HashMap()
         if (!jsonString.isNullOrEmpty()) {
@@ -248,42 +244,26 @@ class GameActivity : AppCompatActivity() {
         }
         val json = partidaPrefs.getString("ListaDescubierta", null)
         if (json != null) {
-            Log.d("JSON NO ES NULL", "JSON NO ES NULL")
+
             var jsonOb = JSONObject(json);
             val keys = jsonOb.keys()
             keys.forEach { s ->
                 cartasDescubiertas.add(s.toInt())
-                Log.d("FOR EACH", "FOR EACH")
+
             }
         }
         for ((clave, valor) in hashMap) {
             if (cartasDescubiertas.contains(clave.toInt())) {
                 var btn = findViewById<Button>(clave.toInt());
-                Log.d("valor del hasmap if",hashMap[clave].toString())
                 btn.setText(valor.toString());
                 btn.setBackgroundColor(Color.parseColor("#008F39")) // VERDE
                 btn.isEnabled = false;
             } else {
                 var btn = findViewById<Button>(clave.toInt());
-                Log.d("valor hasmap else", hashMap[clave].toString())
                 btn.setText(valor.toString());
                 btn.setBackgroundColor(Color.parseColor("#000000")) // NEGRO
             }
         }
-//        for (element in cartasDescubiertas) {
-//            if (cartasDescubiertas.contains(clave)) {
-//                var btn = findViewById<Button>(element);
-//                Log.d("valor del hasmap if",hashMap[element.toString()].toString())
-//                btn.setText(hashMap[element.toString()].toString());
-//                btn.setBackgroundColor(Color.parseColor("#008F39")) // VERDE
-//                btn.isEnabled = false;
-//            } else {
-//                var btn = findViewById<Button>(element);
-//                Log.d("valor hasmap else", hashMap[element.toString()].toString())
-//                btn.setText(hashMap[element.toString()].toString());
-//                btn.setBackgroundColor(Color.parseColor("#000000")) // NEGRO
-//            }
-//        }
     }
     fun guardarPartida(){
         for (i in cartasDescubiertas) {
@@ -292,11 +272,9 @@ class GameActivity : AppCompatActivity() {
         var editor = partidaPrefs.edit();
         editor.putString("ListaDescubierta", jsonObjectList.toString());
         editor.putInt("hayPartida",1);
-        Log.d("dentro del guardar partida", " DENTRO DEL GUARDAR PARTIDA")
         editor.putString("contador",contadorMov.getText().toString());
         editor.commit();
     }
-//    fun tarjetasAShared(){
 //       var editor = partidaPrefs.edit();
 //       editor.putString("tarjeta1","2131231180")
 //        editor.putString("tarjeta2","2131231188")
@@ -314,8 +292,6 @@ class GameActivity : AppCompatActivity() {
 //        editor.putString("tarjeta14","2131231185")
 //        editor.putString("tarjeta15","2131231186")
 //        editor.putString("tarjeta16","2131231187")
-//        editor.commit();
-//    }
 
     fun bloquearBotones(ok: Boolean) {
         var cartas = mutableListOf(
@@ -492,7 +468,7 @@ class GameActivity : AppCompatActivity() {
                 if(sumarMovimientos == 0){
                     sumarMovimientos++
                 }
-                sumarMovimientos = sumarMovimientos + tomarMov!!.toInt();
+                sumarMovimientos = 1 + tomarMov!!.toInt();
                 var editor = partidaPrefs.edit();
                 editor.putString("contador","0");
                 editor.commit();
