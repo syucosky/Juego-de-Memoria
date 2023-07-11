@@ -45,6 +45,7 @@ class MenuActivity : AppCompatActivity() {
     }
     fun comenzarJuegoBtn(v : View){
         val i = Intent(this, GameActivity::class.java);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
     }
     fun menuAyuda(v : View){

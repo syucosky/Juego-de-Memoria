@@ -15,6 +15,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.core.os.postDelayed
+import org.json.JSONException
+import org.json.JSONObject
 
 
 
@@ -26,18 +28,30 @@ class GameActivity : AppCompatActivity() {
     private var validadorClick = true; // VALIDAR QUE SE HAYA CLICKEADO 1ra O 2do VEZ
     private var cartasDescubiertas: MutableList<Int> = mutableListOf();
     private val PREFS_NAME = "partidaGuardada"
-    val partidaGuardada : SharedPreferences = getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+    private lateinit var partidaPrefs: SharedPreferences
+    private val hashMap: HashMap<Int, Int> = HashMap()
+    private val jsonObjectMap = JSONObject()
+    private val jsonObjectList = JSONObject();
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game);
-
         contadorMov = findViewById(R.id.txtContador);
-        comenzarJuego(findViewById(R.id.btnReiniciarComenzar));
-
-
+        partidaPrefs = getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+        var okPartida = partidaPrefs.getInt("hayPartida",3);
+        var contadorShPref = partidaPrefs.getString("contador",null);
+        if(okPartida == 1){
+            Log.d("dentro del id CargarPart", " DENTRO DEL CARGAR PARTIDA")
+            contadorMov.setText(contadorShPref)
+            cargarPartida();
+        }else {
+            Log.d("dentro del else comenzarJuego", " DENTRO DEL COMENZAR JUEGO")
+            comenzarJuego(findViewById(R.id.btnReiniciarComenzar));
+        }
 
         var i = findViewById<ImageView>(R.id.ivVolver);
         i.setOnClickListener() {
+            guardarPartida();
             val i = Intent(this, MenuActivity::class.java);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(i);
@@ -49,10 +63,8 @@ class GameActivity : AppCompatActivity() {
         }else{
             var mostrarTop1 = findViewById<TextView>(R.id.movTop1).setText(top1.toString());
         }
-
-
-
     }
+
     fun corrimientoRank(num : Int, mov : Int, nombre : String){
         val sharedPreferences : SharedPreferences = getSharedPreferences("Rank5", MODE_PRIVATE);
         var editor = sharedPreferences.edit()
@@ -148,6 +160,7 @@ class GameActivity : AppCompatActivity() {
             cartasDescubiertas.clear();
         }
         if(item.itemId == R.id.volverAlMenu){
+            guardarPartida();
             val i = Intent(this, MenuActivity::class.java);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(i);
@@ -187,13 +200,16 @@ class GameActivity : AppCompatActivity() {
 
 
     fun prepararJuego() {
+        var editorClear = partidaPrefs.edit();
+        editorClear.clear();
+        editorClear.commit();
+        hashMap.clear();
         val cartas = mutableListOf(
             R.id.tarjeta1, R.id.tarjeta2, R.id.tarjeta3, R.id.tarjeta4,
             R.id.tarjeta5, R.id.tarjeta6, R.id.tarjeta7, R.id.tarjeta8,
             R.id.tarjeta9, R.id.tarjeta10, R.id.tarjeta11, R.id.tarjeta12,
             R.id.tarjeta13, R.id.tarjeta14, R.id.tarjeta15, R.id.tarjeta16
         ); // LISTA MUTABLE CON LOS ID`S DE LAS CARTAS
-        var editor = partidaGuardada.edit();
         for (numero in 1..8) { // ESTRUCTURA PARA ELEGIR NUMERO Y POSICION DENTRO DEL TABLERO
             for (y in 1..2) {
                 var cartaAleatoria = cartas.random(); // SELECCIONA CARTA ALEATORIA
@@ -201,12 +217,105 @@ class GameActivity : AppCompatActivity() {
                 var carta =findViewById<Button>(cartaAleatoria); // SELECCIONA A TRAVES DEL ID LA CARTA
                 carta.setText(numero.toString()); // INSERTA EL NUMERO EN LA CARTA
                 carta.setBackgroundColor(Color.parseColor("#000000"));
+                Log.d("Dentro prepararJuego", numero.toString())
+                hashMap[cartaAleatoria] = numero;
                 carta.isEnabled = true;
-                editor.putString("tarjeta")
             }
-
+            for ((key, value) in hashMap) {
+                jsonObjectMap.put(key.toString(),value)
+            }
+            val editor = partidaPrefs.edit()
+            editor.putString("hashMapCartas", jsonObjectMap.toString())
+            editor.commit()
         }
     }
+    fun cargarPartida(){
+        Log.d("CARGAR PARTIDA FUNCION", " CARGAR PARTIDA FUNCION")
+        val jsonString: String? = partidaPrefs.getString("hashMapCartas", null);
+        val hashMap: HashMap<String, Int> = HashMap()
+        if (!jsonString.isNullOrEmpty()) {
+            try {
+                val jsonObject = JSONObject(jsonString)
+                val keys = jsonObject.keys()
+                while (keys.hasNext()) {
+                    val key = keys.next()
+                    val value = jsonObject.getInt(key)
+                    hashMap[key] = value
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }
+        val json = partidaPrefs.getString("ListaDescubierta", null)
+        if (json != null) {
+            Log.d("JSON NO ES NULL", "JSON NO ES NULL")
+            var jsonOb = JSONObject(json);
+            val keys = jsonOb.keys()
+            keys.forEach { s ->
+                cartasDescubiertas.add(s.toInt())
+                Log.d("FOR EACH", "FOR EACH")
+            }
+        }
+        for ((clave, valor) in hashMap) {
+            if (cartasDescubiertas.contains(clave.toInt())) {
+                var btn = findViewById<Button>(clave.toInt());
+                Log.d("valor del hasmap if",hashMap[clave].toString())
+                btn.setText(valor.toString());
+                btn.setBackgroundColor(Color.parseColor("#008F39")) // VERDE
+                btn.isEnabled = false;
+            } else {
+                var btn = findViewById<Button>(clave.toInt());
+                Log.d("valor hasmap else", hashMap[clave].toString())
+                btn.setText(valor.toString());
+                btn.setBackgroundColor(Color.parseColor("#000000")) // NEGRO
+            }
+        }
+//        for (element in cartasDescubiertas) {
+//            if (cartasDescubiertas.contains(clave)) {
+//                var btn = findViewById<Button>(element);
+//                Log.d("valor del hasmap if",hashMap[element.toString()].toString())
+//                btn.setText(hashMap[element.toString()].toString());
+//                btn.setBackgroundColor(Color.parseColor("#008F39")) // VERDE
+//                btn.isEnabled = false;
+//            } else {
+//                var btn = findViewById<Button>(element);
+//                Log.d("valor hasmap else", hashMap[element.toString()].toString())
+//                btn.setText(hashMap[element.toString()].toString());
+//                btn.setBackgroundColor(Color.parseColor("#000000")) // NEGRO
+//            }
+//        }
+    }
+    fun guardarPartida(){
+        for (i in cartasDescubiertas) {
+            jsonObjectList.put(i.toString(),"Hola")
+        }
+        var editor = partidaPrefs.edit();
+        editor.putString("ListaDescubierta", jsonObjectList.toString());
+        editor.putInt("hayPartida",1);
+        Log.d("dentro del guardar partida", " DENTRO DEL GUARDAR PARTIDA")
+        editor.putString("contador",contadorMov.getText().toString());
+        editor.commit();
+    }
+//    fun tarjetasAShared(){
+//       var editor = partidaPrefs.edit();
+//       editor.putString("tarjeta1","2131231180")
+//        editor.putString("tarjeta2","2131231188")
+//        editor.putString("tarjeta3","2131231189")
+//        editor.putString("tarjeta4","2131231190")
+//        editor.putString("tarjeta5","2131231191")
+//        editor.putString("tarjeta6","2131231192")
+//        editor.putString("tarjeta7","2131231193")
+//        editor.putString("tarjeta8","2131231194")
+//        editor.putString("tarjeta9","2131231195")
+//        editor.putString("tarjeta10","2131231181")
+//        editor.putString("tarjeta11","2131231182")
+//        editor.putString("tarjeta12","2131231183")
+//        editor.putString("tarjeta13","2131231184")
+//        editor.putString("tarjeta14","2131231185")
+//        editor.putString("tarjeta15","2131231186")
+//        editor.putString("tarjeta16","2131231187")
+//        editor.commit();
+//    }
 
     fun bloquearBotones(ok: Boolean) {
         var cartas = mutableListOf(
@@ -258,7 +367,7 @@ class GameActivity : AppCompatActivity() {
     fun addCartasAlista(uno : Int, dos: Int){
         cartasDescubiertas.add(uno);
         cartasDescubiertas.add(dos);
-        if(cartasDescubiertas.size == 2) {     // PONER EN 2 PARA ACELERAR EL JUEGO
+        if(cartasDescubiertas.size == 16) {     // PONER EN 2 PARA ACELERAR EL JUEGO
             val posicion = buscarPos(sumarMovimientos)
             if(posicion != 0){
                 val input = EditText(this)
@@ -358,7 +467,8 @@ class GameActivity : AppCompatActivity() {
             bloquearBotones(false);
             if(seleccionUno.getText().equals(seleccionDos.getText())){
                 addCartasAlista(seleccionUno.getId(),seleccionDos.getId()); // AGREGO LAS CARTAS  A LA LISTA PARA DSP NO DESBLOQUEARLAS EN LA LINEA 119
-                Handler().postDelayed(500) {
+
+              Handler().postDelayed(500) {
                     seleccionUno.setBackgroundColor(Color.parseColor("#008F39")); //VERDE
                     seleccionDos.setBackgroundColor(Color.parseColor("#008F39"));
                 }
@@ -375,7 +485,18 @@ class GameActivity : AppCompatActivity() {
             Handler().postDelayed(1100) {
                 desbloquearBotonesPorLista(true,cartasDescubiertas);
             }
-            sumarMovimientos++;
+            var tomarMov = partidaPrefs.getString("contador","0")
+            if(tomarMov == "0"){
+                sumarMovimientos++;
+            }else{
+                if(sumarMovimientos == 0){
+                    sumarMovimientos++
+                }
+                sumarMovimientos = sumarMovimientos + tomarMov!!.toInt();
+                var editor = partidaPrefs.edit();
+                editor.putString("contador","0");
+                editor.commit();
+            }
             contadorMov.setText(sumarMovimientos.toString());
         }
     }
